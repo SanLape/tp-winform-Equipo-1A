@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using dominio;
+using negocio;
 
 namespace TPWinForm
 {
@@ -87,6 +89,12 @@ namespace TPWinForm
         {
             FmrEliminarCategoria ventana = new FmrEliminarCategoria();
             ventana.ShowDialog();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            articuloNegocio negocio = new articuloNegocio();
+            dgvArticulo.DataSource = negocio.listar();
         }
     }
 }
