@@ -14,15 +14,11 @@ namespace TPWinForm
 {
     public partial class Form1 : Form
     {
+        // Asegúrate de asociar el evento KeyDown en el constructor o en InitializeComponent
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void listadoDeArticulosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FmrListadoArticulos ventana = new FmrListadoArticulos();
-            ventana.ShowDialog();
+            txtBuscarArtículo.KeyDown += txtBuscarArtículo_KeyDown;
         }
 
         private void mToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,12 +36,6 @@ namespace TPWinForm
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FmrElimiarArticulo ventana = new FmrElimiarArticulo();
-            ventana.ShowDialog();
-        }
-
-        private void busquedaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FmrBuscar ventana = new FmrBuscar();
             ventana.ShowDialog();
         }
 
@@ -95,6 +85,39 @@ namespace TPWinForm
         {
             articuloNegocio negocio = new articuloNegocio();
             dgvArticulo.DataSource = negocio.listar();
+        }
+
+        private void dgvArticulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void lblBuscarArticulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Evento KeyDown para el TextBox de búsqueda de artículos por código
+        private void txtBuscarArtículo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                articuloNegocio negocio = new articuloNegocio();
+                Articulo art = negocio.buscarPorCodigo(txtBuscarArtículo.Text);
+
+                if (art != null)
+                {
+                    List<Articulo> resultado = new List<Articulo> { art };
+                    dataGridViewBuscarArticulo.DataSource = null; //limpio primero por si hay busquedas anteriores
+                    dataGridViewBuscarArticulo.DataSource = resultado;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró un artículo con ese código.");
+                    dataGridViewBuscarArticulo.DataSource = null;
+                }
+
+                e.SuppressKeyPress = true; // evita el beep del Enter
+            }
         }
     }
 }

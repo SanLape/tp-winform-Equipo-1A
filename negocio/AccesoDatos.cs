@@ -16,6 +16,13 @@ namespace negocio
         {
             get {  return lector; }
         }
+
+        // Agregado para acceder a comando desde afuera
+        public SqlCommand Comando
+        {
+            get { return comando; }
+        }
+
         public AccesoDatos()
         {
             conexion = new SqlConnection("server =.\\SQLEXPRESS; database = CATALOGO_P3_DB ; integrated security = true");  // AGREGAR EL NOMBRE DE LA BASE DE DATOS **DATABASE**

@@ -49,5 +49,46 @@ namespace negocio
             }
         }
 
+        // Nuevo método para buscar un artículo por su código
+        public Articulo buscarPorCodigo(string codigo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Articulo aux = null;
+
+            try
+            {
+                string consulta = "SELECT Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio " +
+                                  "FROM ARTICULOS WHERE Codigo = @Codigo";
+
+                datos.setConsulta(consulta);
+                datos.Comando.Parameters.Clear();
+                datos.Comando.Parameters.AddWithValue("@Codigo", codigo);
+
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    aux = new Articulo();
+                    aux.IdArticulo = (int)datos.Lector["Id"];
+                    aux.CodigoArticulo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.IdMarca = (int)datos.Lector["IdMarca"];
+                    aux.IdCategoria = (int)datos.Lector["IdCategoria"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                }
+
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
