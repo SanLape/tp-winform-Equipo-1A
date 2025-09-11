@@ -64,6 +64,8 @@ namespace negocio
             }
         }
 
+
+
         // Nuevo método para buscar un artículo por su código
         public Articulo buscarPorCodigo(string codigo)
         {

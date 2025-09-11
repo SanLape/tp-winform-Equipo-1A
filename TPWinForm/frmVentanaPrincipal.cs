@@ -161,5 +161,10 @@ namespace TPWinForm
             }
         }
 
+        private void btnMarca_Click(object sender, EventArgs e)
+        {
+            frmMarcaCategoria ventana = new frmMarcaCategoria(true);    // es true xq sale del boton de MARCA.
+            ventana.ShowDialog();
+        }
     }
 }

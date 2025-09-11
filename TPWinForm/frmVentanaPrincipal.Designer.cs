@@ -47,6 +47,7 @@
             this.txtBuscarArtículo = new System.Windows.Forms.TextBox();
             this.dataGridViewBuscarArticulo = new System.Windows.Forms.DataGridView();
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
+            this.btnMarca = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBuscarArticulo)).BeginInit();
@@ -120,21 +121,21 @@
             // agregarToolStripMenuItem1
             // 
             this.agregarToolStripMenuItem1.Name = "agregarToolStripMenuItem1";
-            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.agregarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.agregarToolStripMenuItem1.Text = "Agregar";
             this.agregarToolStripMenuItem1.Click += new System.EventHandler(this.agregarToolStripMenuItem1_Click);
             // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem1
             // 
             this.eliminarToolStripMenuItem1.Name = "eliminarToolStripMenuItem1";
-            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.eliminarToolStripMenuItem1.Text = "Eliminar";
             this.eliminarToolStripMenuItem1.Click += new System.EventHandler(this.eliminarToolStripMenuItem1_Click);
             // 
@@ -151,21 +152,21 @@
             // agregarToolStripMenuItem2
             // 
             this.agregarToolStripMenuItem2.Name = "agregarToolStripMenuItem2";
-            this.agregarToolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
+            this.agregarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.agregarToolStripMenuItem2.Text = "Agregar";
             this.agregarToolStripMenuItem2.Click += new System.EventHandler(this.agregarToolStripMenuItem2_Click);
             // 
             // editarToolStripMenuItem1
             // 
             this.editarToolStripMenuItem1.Name = "editarToolStripMenuItem1";
-            this.editarToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.editarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.editarToolStripMenuItem1.Text = "Editar";
             this.editarToolStripMenuItem1.Click += new System.EventHandler(this.editarToolStripMenuItem1_Click);
             // 
             // eliminarToolStripMenuItem2
             // 
             this.eliminarToolStripMenuItem2.Name = "eliminarToolStripMenuItem2";
-            this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
+            this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.eliminarToolStripMenuItem2.Text = "Eliminar";
             this.eliminarToolStripMenuItem2.Click += new System.EventHandler(this.eliminarToolStripMenuItem2_Click);
             // 
@@ -183,7 +184,7 @@
             // lblBuscarArticulo
             // 
             this.lblBuscarArticulo.AutoSize = true;
-            this.lblBuscarArticulo.Location = new System.Drawing.Point(48, 465);
+            this.lblBuscarArticulo.Location = new System.Drawing.Point(48, 526);
             this.lblBuscarArticulo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBuscarArticulo.Name = "lblBuscarArticulo";
             this.lblBuscarArticulo.Size = new System.Drawing.Size(83, 13);
@@ -194,8 +195,8 @@
             // txtBuscarArtículo
             // 
             this.txtBuscarArtículo.BackColor = System.Drawing.SystemColors.Info;
-            this.txtBuscarArtículo.Location = new System.Drawing.Point(128, 462);
-            this.txtBuscarArtículo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBuscarArtículo.Location = new System.Drawing.Point(128, 523);
+            this.txtBuscarArtículo.Margin = new System.Windows.Forms.Padding(2);
             this.txtBuscarArtículo.Name = "txtBuscarArtículo";
             this.txtBuscarArtículo.Size = new System.Drawing.Size(76, 20);
             this.txtBuscarArtículo.TabIndex = 3;
@@ -204,7 +205,7 @@
             // 
             this.dataGridViewBuscarArticulo.BackgroundColor = System.Drawing.SystemColors.Info;
             this.dataGridViewBuscarArticulo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBuscarArticulo.Location = new System.Drawing.Point(50, 488);
+            this.dataGridViewBuscarArticulo.Location = new System.Drawing.Point(50, 549);
             this.dataGridViewBuscarArticulo.Name = "dataGridViewBuscarArticulo";
             this.dataGridViewBuscarArticulo.RowHeadersWidth = 51;
             this.dataGridViewBuscarArticulo.Size = new System.Drawing.Size(716, 80);
@@ -219,11 +220,22 @@
             this.pbxArticulo.TabIndex = 5;
             this.pbxArticulo.TabStop = false;
             // 
+            // btnMarca
+            // 
+            this.btnMarca.Location = new System.Drawing.Point(50, 452);
+            this.btnMarca.Name = "btnMarca";
+            this.btnMarca.Size = new System.Drawing.Size(154, 51);
+            this.btnMarca.TabIndex = 6;
+            this.btnMarca.Text = "MARCA";
+            this.btnMarca.UseVisualStyleBackColor = true;
+            this.btnMarca.Click += new System.EventHandler(this.btnMarca_Click);
+            // 
             // frmVentanaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1166, 641);
+            this.Controls.Add(this.btnMarca);
             this.Controls.Add(this.pbxArticulo);
             this.Controls.Add(this.dataGridViewBuscarArticulo);
             this.Controls.Add(this.txtBuscarArtículo);
@@ -231,7 +243,7 @@
             this.Controls.Add(this.dgvArticulo);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmVentanaPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
@@ -267,6 +279,7 @@
         private System.Windows.Forms.TextBox txtBuscarArtículo;
         private System.Windows.Forms.DataGridView dataGridViewBuscarArticulo;
         private System.Windows.Forms.PictureBox pbxArticulo;
+        private System.Windows.Forms.Button btnMarca;
     }
 }
 
