@@ -41,13 +41,13 @@
             this.dgvMarCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMarCat.Location = new System.Drawing.Point(11, 40);
             this.dgvMarCat.Name = "dgvMarCat";
-            this.dgvMarCat.Size = new System.Drawing.Size(439, 329);
+            this.dgvMarCat.Size = new System.Drawing.Size(308, 231);
             this.dgvMarCat.TabIndex = 0;
             // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(12, 382);
+            this.lblNombre.Location = new System.Drawing.Point(12, 280);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(57, 13);
             this.lblNombre.TabIndex = 1;
@@ -55,14 +55,14 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(75, 379);
+            this.txtNombre.Location = new System.Drawing.Point(75, 277);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(375, 20);
+            this.txtNombre.Size = new System.Drawing.Size(244, 20);
             this.txtNombre.TabIndex = 2;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(11, 405);
+            this.btnAgregar.Location = new System.Drawing.Point(11, 303);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(144, 36);
             this.btnAgregar.TabIndex = 3;
@@ -71,18 +71,19 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(166, 405);
+            this.btnEliminar.Location = new System.Drawing.Point(166, 303);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(153, 35);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "ELIMINAR";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // frmMarcaCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(344, 358);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtNombre);

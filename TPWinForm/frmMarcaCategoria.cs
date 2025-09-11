@@ -44,6 +44,26 @@ namespace TPWinForm
                     throw ex;
                 }
             }
+            else
+            {
+                categoriaNegocio catNeg = new categoriaNegocio();
+                try
+                {
+                    categoriaLista = catNeg.listar();
+                    dgvMarCat.DataSource = categoriaLista;
+
+                    this.Text = " CATEGORIA ";
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
