@@ -14,7 +14,9 @@ namespace negocio
         
         public List<Articulo> listar()
         {
-            string consulta = "select Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio from ARTICULOS";
+            string select = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Id marcID, M.Descripcion marcDesc, C.Id catID, C.Descripcion catDesc, Precio, I.Id imgID, I.ImagenUrl imgUrl";
+            string from = " FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id LEFT JOIN IMAGENES AS I ON I.IdArticulo = A.Id";
+            string consulta = select + from;
 
             try
             {
@@ -29,9 +31,22 @@ namespace negocio
                     aux.CodigoArticulo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.IdMarca = (int)datos.Lector["IdMarca"];
-                    aux.IdCategoria = (int)datos.Lector["IdCategoria"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
+                    
+                    aux.marca = new Marca();
+                    aux.marca.IdMarca = (int)datos.Lector["marcID"];
+                    aux.marca.Descripcion = (string)datos.Lector["marcDesc"];
+
+                    aux.categoria = new Categoria();
+                    aux.categoria.IdCategoria = (int)datos.Lector["catID"];
+                    aux.categoria.Descripcion = (string)datos.Lector["catDesc"];
+
+                    aux.imagen = new Imagen();
+                    if (!(datos.Lector["imgID"] is DBNull))
+                    {
+                        aux.imagen.IdImagen = (int)datos.Lector["imgID"];
+                        aux.imagen.ImagenUrl = (string)datos.Lector["imgUrl"];
+                    }
 
                     lista.Add(aux);
                 }
@@ -73,8 +88,8 @@ namespace negocio
                     aux.CodigoArticulo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.IdMarca = (int)datos.Lector["IdMarca"];
-                    aux.IdCategoria = (int)datos.Lector["IdCategoria"];
+                    //aux.IdMarca = (int)datos.Lector["IdMarca"];
+                    //aux.IdCategoria = (int)datos.Lector["IdCategoria"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
                 }
 
