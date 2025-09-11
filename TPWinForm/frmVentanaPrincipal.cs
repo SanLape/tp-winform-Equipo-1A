@@ -12,15 +12,61 @@ using negocio;
 
 namespace TPWinForm
 {
-    public partial class Form1 : Form
+    public partial class frmVentanaPrincipal : Form
     {
+        private List<Articulo> listaArticulo;
         // Asegúrate de asociar el evento KeyDown en el constructor o en InitializeComponent
-        public Form1()
+        public frmVentanaPrincipal()
         {
             InitializeComponent();
             txtBuscarArtículo.KeyDown += txtBuscarArtículo_KeyDown;
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            cargar();
+        }
+        public void cargar()
+        {
+            articuloNegocio artNegocio = new articuloNegocio();
+            try
+            {
+                listaArticulo = artNegocio.listar();
+                dgvArticulo.DataSource = listaArticulo;
+                ocultarColumnas();  // este metodo oculta las columnas 
+                cargrImgen(listaArticulo[0].imagen.ImagenUrl);
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private void ocultarColumnas()
+        {
+            dgvArticulo.Columns["imagen"].Visible = false;      //oculta las columnas
+            dgvArticulo.Columns["idArticulo"].Visible = false;
+        }
+
+        private void cargrImgen(string imgen)
+        {
+            try
+            {
+                pbxArticulo.Load(imgen);
+            }
+            catch (Exception)
+            {
+                pbxArticulo.Load("https://mrchava.es/wp-content/uploads/2021/09/placeholder.png");
+            }
+        }
+        private void dgvArticulo_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvArticulo.CurrentRow != null) 
+            {
+                Articulo artSelec = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
+                cargrImgen(artSelec.imagen.ImagenUrl);
+            }
+
+        }
         private void mToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FmrModificarArticulo ventana = new FmrModificarArticulo(); 
@@ -81,11 +127,6 @@ namespace TPWinForm
             ventana.ShowDialog();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            articuloNegocio negocio = new articuloNegocio();
-            dgvArticulo.DataSource = negocio.listar();
-        }
 
         private void dgvArticulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -119,5 +160,6 @@ namespace TPWinForm
                 e.SuppressKeyPress = true; // evita el beep del Enter
             }
         }
+
     }
 }
