@@ -61,6 +61,37 @@ namespace TPWinForm
             }
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtNombre.Text))  //COMPRUEBA SI EL TXTBOX TIENE ALGO 
+            {
+                try
+                {
+                    if (marca)
+                    {
+                        marcaNegocio marcaNegocio = new marcaNegocio();
+                        Marca aux = new Marca();
+                        aux.Descripcion = txtNombre.Text;
+                        marcaNegocio.agregar(aux);
+
+                        MessageBox.Show(" MARCA AGREGADA ");
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                MessageBox.Show(" AGREGAR UN NOMBRE ");
+            }
+        }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             

@@ -40,5 +40,24 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void agregar(Marca nuevo)
+        {
+            string insert = "INSERT INTO MARCAS (Descripcion) VALUES (@nombre)";
+            try
+            {
+                datos.setConsulta(insert);
+                datos.setearParametro("@nombre", nuevo.Descripcion);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex) 
+            { 
+                throw ex; 
+            }
+            finally
+            { 
+                datos.cerrarConexion();
+            }
+        }
     }
 }

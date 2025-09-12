@@ -47,6 +47,23 @@ namespace negocio
                 throw ex;
             }
         }
+        public void ejecutarAccion()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery();  //ejecuta una sentencia q no es una QUERY
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void setearParametro(string nombre, object valor)    //nombre de la variable SQL q completa y valor del objeto
+        {
+            comando.Parameters.AddWithValue(nombre, valor);
+        }
         public void cerrarConexion()
         {
             if(lector != null)
