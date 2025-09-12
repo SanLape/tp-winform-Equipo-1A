@@ -27,9 +27,10 @@ namespace TPWinForm
         {
             cargar();
         }
-        private void cargar() 
+        private void cargar()
         {
-            if (marca) 
+            txtNombre.Text = string.Empty;
+            if (marca)
             {
                 marcaNegocio marNeg = new marcaNegocio();
                 try
@@ -102,31 +103,69 @@ namespace TPWinForm
         {
             try
             {
-                if (marca)
+                DialogResult respuesta = MessageBox.Show("¿Esta seguro que desea eliminar?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes)
                 {
-                    marcaNegocio marcaNegocio = new marcaNegocio();
-                    Marca marca = (Marca)dgvMarCat.CurrentRow.DataBoundItem;
+                    if (marca)
+                    {
+                        marcaNegocio marcaNegocio = new marcaNegocio();
+                        Marca marca = (Marca)dgvMarCat.CurrentRow.DataBoundItem;
 
-                    marcaNegocio.eliminar(marca.IdMarca);
-                    
-                    MessageBox.Show(" MARCA ELIMINADA ");
+                        marcaNegocio.eliminar(marca.IdMarca);
+
+                        MessageBox.Show(" MARCA ELIMINADA ");
+                    }
+                    else
+                    {
+                        categoriaNegocio categoriaNegocio = new categoriaNegocio();
+                        Categoria cate = (Categoria)dgvMarCat.CurrentRow.DataBoundItem;
+
+                        categoriaNegocio.eliminar(cate.IdCategoria);
+
+                        MessageBox.Show(" CATEGORIA ELIMINADA ");
+
+                    }
+                    cargar();
                 }
                 else
                 {
-                    categoriaNegocio categoriaNegocio = new categoriaNegocio();
-                    Categoria cate = (Categoria)dgvMarCat.CurrentRow.DataBoundItem;
-
-                    categoriaNegocio.eliminar(cate.IdCategoria);
-
-                    MessageBox.Show(" CATEGORIA ELIMINADA ");
-
+                    MessageBox.Show(" CANCELADO ");
                 }
-                cargar();
             }
             catch (Exception ex)
             {
 
                 throw ex;
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtNombre.Text))  //COMPRUEBA SI EL TXTBOX TIENE ALGO
+            {
+                if (marca)
+                {
+                    marcaNegocio marNegocio = new marcaNegocio();
+                    Marca marca = (Marca)dgvMarCat.CurrentRow.DataBoundItem;
+                    marca.Descripcion = txtNombre.Text;
+
+                    marNegocio.modificar(marca);
+
+                    MessageBox.Show(" MARCA MODIFICADA ");
+
+                }
+                else
+                {
+                    categoriaNegocio catNegocio = new categoriaNegocio();
+                    Categoria categoria = (Categoria)dgvMarCat.CurrentRow.DataBoundItem;
+                    categoria.Descripcion = txtNombre.Text;
+
+                    catNegocio.modificar(categoria);
+
+                    MessageBox.Show(" CATEGORIA MODIFICADA ");
+
+                }
+                cargar();
             }
         }
     }
