@@ -28,38 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbModificarArticulo = new System.Windows.Forms.TextBox();
             this.lblArticuloModificar = new System.Windows.Forms.Label();
+            this.dgvModificarArticulo = new System.Windows.Forms.DataGridView();
+            this.dgvParaModificar = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarArticulo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParaModificar)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tbModificarArticulo
             // 
-            this.textBox1.Location = new System.Drawing.Point(101, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tbModificarArticulo.Location = new System.Drawing.Point(76, 33);
+            this.tbModificarArticulo.Margin = new System.Windows.Forms.Padding(2);
+            this.tbModificarArticulo.Name = "tbModificarArticulo";
+            this.tbModificarArticulo.Size = new System.Drawing.Size(76, 20);
+            this.tbModificarArticulo.TabIndex = 0;
+            this.tbModificarArticulo.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tbModificarArticulo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbModificarArticulo_KeyDown);
             // 
             // lblArticuloModificar
             // 
             this.lblArticuloModificar.AutoSize = true;
-            this.lblArticuloModificar.Location = new System.Drawing.Point(27, 41);
+            this.lblArticuloModificar.Location = new System.Drawing.Point(20, 33);
+            this.lblArticuloModificar.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblArticuloModificar.Name = "lblArticuloModificar";
-            this.lblArticuloModificar.Size = new System.Drawing.Size(51, 16);
+            this.lblArticuloModificar.Size = new System.Drawing.Size(42, 13);
             this.lblArticuloModificar.TabIndex = 1;
             this.lblArticuloModificar.Text = "Articulo";
             this.lblArticuloModificar.Click += new System.EventHandler(this.label1_Click);
             // 
+            // dgvModificarArticulo
+            // 
+            this.dgvModificarArticulo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModificarArticulo.Location = new System.Drawing.Point(113, 83);
+            this.dgvModificarArticulo.Name = "dgvModificarArticulo";
+            this.dgvModificarArticulo.Size = new System.Drawing.Size(497, 150);
+            this.dgvModificarArticulo.TabIndex = 2;
+            // 
+            // dgvParaModificar
+            // 
+            this.dgvParaModificar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvParaModificar.Location = new System.Drawing.Point(113, 271);
+            this.dgvParaModificar.Name = "dgvParaModificar";
+            this.dgvParaModificar.Size = new System.Drawing.Size(497, 150);
+            this.dgvParaModificar.TabIndex = 3;
+            // 
             // FmrModificarArticulo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(771, 532);
+            this.Controls.Add(this.dgvParaModificar);
+            this.Controls.Add(this.dgvModificarArticulo);
             this.Controls.Add(this.lblArticuloModificar);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbModificarArticulo);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FmrModificarArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Modificar Articulo";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificarArticulo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParaModificar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -67,7 +95,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbModificarArticulo;
         private System.Windows.Forms.Label lblArticuloModificar;
+        private System.Windows.Forms.DataGridView dgvModificarArticulo;
+        private System.Windows.Forms.DataGridView dgvParaModificar;
     }
 }

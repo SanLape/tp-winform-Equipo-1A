@@ -32,7 +32,7 @@ namespace TPWinForm
             {
                 listaArticulo = artNegocio.listar();
                 dgvArticulo.DataSource = listaArticulo;
-                ocultarColumnas();  // este metodo oculta las columnas 
+                ocultar_Columnas(dgvArticulo);  // este metodo oculta las columnas 
                 cargrImgen(listaArticulo[0].imagen.ImagenUrl);
             }
             catch (Exception ex)
@@ -41,10 +41,10 @@ namespace TPWinForm
                 MessageBox.Show(ex.ToString());
             }
         }
-        private void ocultarColumnas()
+        private void ocultar_Columnas(DataGridView dataGridView)
         {
-            dgvArticulo.Columns["imagen"].Visible = false;      //oculta las columnas
-            dgvArticulo.Columns["idArticulo"].Visible = false;
+            dataGridView.Columns["imagen"].Visible = false;
+            dataGridView.Columns["IdArticulo"].Visible = false;
         }
 
         private void cargrImgen(string imgen)
@@ -150,8 +150,7 @@ namespace TPWinForm
                     List<Articulo> resultado = new List<Articulo> { art };
                     dataGridViewBuscarArticulo.DataSource = null; //limpio primero por si hay busquedas anteriores
                     dataGridViewBuscarArticulo.DataSource = resultado;
-                    dataGridViewBuscarArticulo.Columns["imagen"].Visible = false;
-                    dataGridViewBuscarArticulo.Columns["IdArticulo"].Visible = false;
+                    ocultar_Columnas(dataGridViewBuscarArticulo);
                 }
                 else
                 {
