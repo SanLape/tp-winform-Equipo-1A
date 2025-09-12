@@ -50,12 +50,30 @@ namespace negocio
 
                 datos.ejecutarAccion();
             }
-            catch (Exception ex) 
-            { 
-                throw ex; 
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
-            { 
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void eliminar(int id)
+        {
+            string consulta = "DELETE FROM MARCAS WHERE Id = @ID";
+            try
+            {
+                datos.setConsulta(consulta);
+                datos.setearParametro("@ID", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
                 datos.cerrarConexion();
             }
         }

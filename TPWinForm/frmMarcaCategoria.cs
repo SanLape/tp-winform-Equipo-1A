@@ -85,8 +85,8 @@ namespace TPWinForm
                         categoriaNegocio.agregar(aux);
 
                         MessageBox.Show(" CATEGORIA AGREGADA ");
-
                     }
+                    cargar();
                 }
                 catch (Exception ex)
                 {
@@ -100,7 +100,34 @@ namespace TPWinForm
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (marca)
+                {
+                    marcaNegocio marcaNegocio = new marcaNegocio();
+                    Marca marca = (Marca)dgvMarCat.CurrentRow.DataBoundItem;
+
+                    marcaNegocio.eliminar(marca.IdMarca);
+                    
+                    MessageBox.Show(" MARCA ELIMINADA ");
+                }
+                else
+                {
+                    categoriaNegocio categoriaNegocio = new categoriaNegocio();
+                    Categoria cate = (Categoria)dgvMarCat.CurrentRow.DataBoundItem;
+
+                    categoriaNegocio.eliminar(cate.IdCategoria);
+
+                    MessageBox.Show(" CATEGORIA ELIMINADA ");
+
+                }
+                cargar();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

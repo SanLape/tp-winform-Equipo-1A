@@ -59,6 +59,25 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void eliminar(int id)
+        {
+            string consulta = "DELETE FROM CATEGORIAS WHERE Id = @ID";
+            try
+            {
+                datos.setConsulta(consulta);
+                datos.setearParametro("@ID", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 
