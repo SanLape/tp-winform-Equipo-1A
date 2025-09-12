@@ -79,6 +79,12 @@ namespace TPWinForm
                     }
                     else
                     {
+                        categoriaNegocio categoriaNegocio = new categoriaNegocio();
+                        Categoria aux = new Categoria();
+                        aux.Descripcion = txtNombre.Text;
+                        categoriaNegocio.agregar(aux);
+
+                        MessageBox.Show(" CATEGORIA AGREGADA ");
 
                     }
                 }
