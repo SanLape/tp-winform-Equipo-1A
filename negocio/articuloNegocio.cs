@@ -78,7 +78,7 @@ namespace negocio
                                   "FROM ARTICULOS A\n" +
                                   "INNER JOIN MARCAS M ON A.IdMarca = M.Id\n" +
                                   "INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id\n" +
-                                  "WHERE A.Codigo = Codigo\n";
+                                  "WHERE A.Codigo = @Codigo\n";
 
                 datos.setConsulta(consulta);
                 datos.Comando.Parameters.Clear();
