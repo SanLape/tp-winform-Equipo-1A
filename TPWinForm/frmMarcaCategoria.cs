@@ -143,27 +143,37 @@ namespace TPWinForm
         {
             if (!string.IsNullOrEmpty(txtNombre.Text))  //COMPRUEBA SI EL TXTBOX TIENE ALGO
             {
-                if (marca)
+                DialogResult respuesta = MessageBox.Show("¿Quiere modificar?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes)
                 {
-                    marcaNegocio marNegocio = new marcaNegocio();
-                    Marca marca = (Marca)dgvMarCat.CurrentRow.DataBoundItem;
-                    marca.Descripcion = txtNombre.Text;
 
-                    marNegocio.modificar(marca);
+                    if (marca)
+                    {
+                        marcaNegocio marNegocio = new marcaNegocio();
+                        Marca marca = (Marca)dgvMarCat.CurrentRow.DataBoundItem;
+                        marca.Descripcion = txtNombre.Text;
 
-                    MessageBox.Show(" MARCA MODIFICADA ");
+                        marNegocio.modificar(marca);
+
+                        MessageBox.Show(" MARCA MODIFICADA ");
+
+                    }
+                    else
+                    {
+                        categoriaNegocio catNegocio = new categoriaNegocio();
+                        Categoria categoria = (Categoria)dgvMarCat.CurrentRow.DataBoundItem;
+                        categoria.Descripcion = txtNombre.Text;
+
+                        catNegocio.modificar(categoria);
+
+                        MessageBox.Show(" CATEGORIA MODIFICADA ");
+
+                    }
 
                 }
                 else
                 {
-                    categoriaNegocio catNegocio = new categoriaNegocio();
-                    Categoria categoria = (Categoria)dgvMarCat.CurrentRow.DataBoundItem;
-                    categoria.Descripcion = txtNombre.Text;
-
-                    catNegocio.modificar(categoria);
-
-                    MessageBox.Show(" CATEGORIA MODIFICADA ");
-
+                    MessageBox.Show(" CANCELADO ");
                 }
                 cargar();
             }
