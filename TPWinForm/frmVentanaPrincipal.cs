@@ -150,6 +150,8 @@ namespace TPWinForm
                     List<Articulo> resultado = new List<Articulo> { art };
                     dataGridViewBuscarArticulo.DataSource = null; //limpio primero por si hay busquedas anteriores
                     dataGridViewBuscarArticulo.DataSource = resultado;
+                    dataGridViewBuscarArticulo.Columns["imagen"].Visible = false;
+                    dataGridViewBuscarArticulo.Columns["IdArticulo"].Visible = false;
                 }
                 else
                 {

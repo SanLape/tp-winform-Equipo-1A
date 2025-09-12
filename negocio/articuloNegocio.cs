@@ -74,8 +74,11 @@ namespace negocio
 
             try
             {
-                string consulta = "SELECT Id, Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio " +
-                                  "FROM ARTICULOS WHERE Codigo = @Codigo";
+                string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion AS Marca, C.Descripcion AS Categoria, A.Precio \n" +
+                                  "FROM ARTICULOS A\n" +
+                                  "INNER JOIN MARCAS M ON A.IdMarca = M.Id\n" +
+                                  "INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id\n" +
+                                  "WHERE A.Codigo = Codigo\n";
 
                 datos.setConsulta(consulta);
                 datos.Comando.Parameters.Clear();
@@ -90,8 +93,10 @@ namespace negocio
                     aux.CodigoArticulo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    //aux.IdMarca = (int)datos.Lector["IdMarca"];
-                    //aux.IdCategoria = (int)datos.Lector["IdCategoria"];
+                    aux.marca = new Marca();
+                    aux.marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.categoria = new Categoria();
+                    aux.categoria.Descripcion = (string)datos.Lector["Categoria"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
                 }
 
