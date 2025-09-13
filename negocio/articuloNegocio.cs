@@ -23,33 +23,59 @@ namespace negocio
                 datos.setConsulta(consulta);
                 datos.ejecutarLectura();
 
+                //NUEVO Para las multiples imágenes
+                Dictionary<int, Articulo> articulos = new Dictionary<int, Articulo>();
+
                 while (datos.Lector.Read())
                 {
-                    Articulo aux = new Articulo();
+                    int idArticulo = (int)datos.Lector["Id"];
 
-                    aux.IdArticulo = (int)datos.Lector["Id"];
-                    aux.CodigoArticulo = (string)datos.Lector["Codigo"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
-                    
-                    aux.marca = new Marca();
-                    aux.marca.IdMarca = (int)datos.Lector["marcID"];
-                    aux.marca.Descripcion = (string)datos.Lector["marcDesc"];
-
-                    aux.categoria = new Categoria();
-                    aux.categoria.IdCategoria = (int)datos.Lector["catID"];
-                    aux.categoria.Descripcion = (string)datos.Lector["catDesc"];
-
-                    aux.imagen = new Imagen();
-                    if (!(datos.Lector["imgID"] is DBNull))
+                    if (!articulos.ContainsKey(idArticulo))
                     {
-                        aux.imagen.IdImagen = (int)datos.Lector["imgID"];
-                        aux.imagen.ImagenUrl = (string)datos.Lector["imgUrl"];
+                        Articulo aux = new Articulo();
+
+                        aux.IdArticulo = idArticulo;
+                        aux.CodigoArticulo = (string)datos.Lector["Codigo"];
+                        aux.Nombre = (string)datos.Lector["Nombre"];
+                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+                        aux.Precio = (decimal)datos.Lector["Precio"];
+
+                        aux.marca = new Marca
+                        {
+                            IdMarca = (int)datos.Lector["marcID"],
+                            Descripcion = (string)datos.Lector["marcDesc"]
+                        };
+
+                        aux.categoria = new Categoria
+                        {
+                            IdCategoria = (int)datos.Lector["catID"],
+                            Descripcion = (string)datos.Lector["catDesc"]
+                        };
+
+                        // inicia la lista de imágenes
+                        aux.Imagenes = new List<Imagen>();
+
+                        articulos.Add(idArticulo, aux);
                     }
 
-                    lista.Add(aux);
+                    //  agrega mas imagens
+                    if (!(datos.Lector["imgID"] is DBNull))
+                    {
+                        Imagen img = new Imagen
+                        {
+                            IdImagen = (int)datos.Lector["imgID"],
+                            ImagenUrl = (string)datos.Lector["imgUrl"]
+                        };
+
+                        articulos[idArticulo].Imagenes.Add(img);
+
+                        // compatibilidad con lo viejo:
+                        if (articulos[idArticulo].imagen == null)
+                            articulos[idArticulo].imagen = img;
+                    }
                 }
+
+                lista = articulos.Values.ToList();
 
                 return lista;
             }
@@ -160,6 +186,8 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+
 
     }
 }
