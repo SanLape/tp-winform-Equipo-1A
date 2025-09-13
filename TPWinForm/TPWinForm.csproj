@@ -52,71 +52,11 @@
     <Compile Include="FmrAgregarArticulo.Designer.cs">
       <DependentUpon>FmrAgregarArticulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FmrAgregarCategoria.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrAgregarCategoria.Designer.cs">
-      <DependentUpon>FmrAgregarCategoria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrAgregarMarca.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrAgregarMarca.Designer.cs">
-      <DependentUpon>FmrAgregarMarca.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrBuscar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrBuscar.Designer.cs">
-      <DependentUpon>FmrBuscar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrDetalles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrDetalles.Designer.cs">
-      <DependentUpon>FmrDetalles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrElimiarArticulo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrElimiarArticulo.Designer.cs">
-      <DependentUpon>FmrElimiarArticulo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrEliminarCategoria.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrEliminarCategoria.Designer.cs">
-      <DependentUpon>FmrEliminarCategoria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrEliminarMarca.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrEliminarMarca.Designer.cs">
-      <DependentUpon>FmrEliminarMarca.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrListadoArticulos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrListadoArticulos.Designer.cs">
-      <DependentUpon>FmrListadoArticulos.cs</DependentUpon>
-    </Compile>
     <Compile Include="FmrModificarArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FmrModificarArticulo.Designer.cs">
       <DependentUpon>FmrModificarArticulo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrModificarCategoria.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrModificarCategoria.Designer.cs">
-      <DependentUpon>FmrModificarCategoria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FmrModificarMarca.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrModificarMarca.Designer.cs">
-      <DependentUpon>FmrModificarMarca.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMarcaCategoria.cs">
       <SubType>Form</SubType>
@@ -135,35 +75,8 @@
     <EmbeddedResource Include="FmrAgregarArticulo.resx">
       <DependentUpon>FmrAgregarArticulo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FmrAgregarMarca.resx">
-      <DependentUpon>FmrAgregarMarca.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrBuscar.resx">
-      <DependentUpon>FmrBuscar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrDetalles.resx">
-      <DependentUpon>FmrDetalles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrElimiarArticulo.resx">
-      <DependentUpon>FmrElimiarArticulo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrEliminarCategoria.resx">
-      <DependentUpon>FmrEliminarCategoria.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrEliminarMarca.resx">
-      <DependentUpon>FmrEliminarMarca.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrListadoArticulos.resx">
-      <DependentUpon>FmrListadoArticulos.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FmrModificarArticulo.resx">
       <DependentUpon>FmrModificarArticulo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrModificarCategoria.resx">
-      <DependentUpon>FmrModificarCategoria.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrModificarMarca.resx">
-      <DependentUpon>FmrModificarMarca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarcaCategoria.resx">
       <DependentUpon>frmMarcaCategoria.cs</DependentUpon>

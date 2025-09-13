@@ -78,56 +78,7 @@ namespace TPWinForm
             FmrAgregarArticulo ventana = new FmrAgregarArticulo();  
             ventana.ShowDialog();
         }
-
-        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FmrElimiarArticulo ventana = new FmrElimiarArticulo();
-            ventana.ShowDialog();
-        }
-
-        private void detallesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FmrDetalles ventana = new FmrDetalles();
-            ventana.ShowDialog();
-        }
-
-        private void agregarToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-          FmrAgregarMarca ventana = new FmrAgregarMarca();
-            ventana.ShowDialog();
-        }
-
-        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           FmrModificarMarca ventana = new FmrModificarMarca();
-            ventana.ShowDialog();
-        }
-
-        private void eliminarToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            FmrEliminarMarca ventana = new FmrEliminarMarca();
-            ventana.ShowDialog();
-        }
-
-        private void agregarToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            FmrAgregarCategoria ventana = new FmrAgregarCategoria();
-            ventana.ShowDialog();
-        }
-
-        private void editarToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            FmrModificarCategoria ventana = new FmrModificarCategoria();
-            ventana.ShowDialog();
-        }
-
-        private void eliminarToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            FmrEliminarCategoria ventana = new FmrEliminarCategoria();
-            ventana.ShowDialog();
-        }
-
-
+ 
         private void dgvArticulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -190,6 +141,54 @@ namespace TPWinForm
             ventanaModificar.ShowDialog();
 
             
+        }
+
+        private void btnEliminarArticulo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string codigo = txtBuscarArtículo.Text.Trim();
+
+                if (string.IsNullOrEmpty(codigo))
+                {
+                    MessageBox.Show("Por favor, ingrese un código de artículo.");
+                    return;
+                }
+
+                articuloNegocio negocio = new articuloNegocio();
+
+                // Verificar si el artículo existe
+                Articulo articulo = negocio.buscarPorCodigo(codigo);
+
+                if (articulo == null)
+                {
+                    MessageBox.Show("No se encontró un artículo con el código: " + codigo);
+                    return;
+                }
+
+                // Confirmación
+                DialogResult confirmacion = MessageBox.Show(
+                    "¿Está seguro de que desea eliminar el artículo con código: " + codigo + "?",
+                    "Eliminar artículo",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (confirmacion == DialogResult.Yes)
+                {
+                    negocio.eliminar(codigo);
+                    MessageBox.Show("Artículo eliminado correctamente.");
+
+                    // Refrescar el DataGridView
+                    dataGridViewBuscarArticulo.DataSource = null;
+                    dgvArticulo.DataSource = null;
+                    dgvArticulo.DataSource = negocio.listar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar: " + ex.Message);
+            }
         }
     }
 }

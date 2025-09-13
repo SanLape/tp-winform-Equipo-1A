@@ -93,7 +93,7 @@ namespace negocio
 
 
 
-        // Nuevo método para buscar un artículo por su código
+        // método para buscar un artículo por su código
         public Articulo buscarPorCodigo(string codigo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -128,6 +128,28 @@ namespace negocio
                 }
 
                 return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        // NUEVO Metodo para eliminar un artículo por su código
+        public void eliminar(string codigo)
+        {
+            try
+            {
+                string consulta = "DELETE FROM ARTICULOS WHERE Codigo = @Codigo";
+                datos.setConsulta(consulta);
+                datos.Comando.Parameters.Clear();
+                datos.setearParametro("@Codigo", codigo);
+
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
