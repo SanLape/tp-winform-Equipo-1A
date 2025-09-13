@@ -178,6 +178,7 @@ namespace TPWinForm
         {
             FmrAgregarArticulo articulo = new FmrAgregarArticulo();
             articulo.ShowDialog();
+            cargar();
         }
     }
 }

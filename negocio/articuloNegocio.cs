@@ -63,6 +63,33 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void agregar(Articulo nuevo)
+        {
+            string insertArticulo = "INSERT INTO ARTICULOS(Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)" +
+                                    " VALUES(@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)";
+
+            try
+            {
+                datos.setConsulta(insertArticulo);
+                datos.setearParametro("@Codigo", nuevo.CodigoArticulo);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.setearParametro("@IdMarca", nuevo.marca.IdMarca);
+                datos.setearParametro("@IdCategoria", nuevo.categoria.IdCategoria);
+                datos.setearParametro("@Precio", nuevo.Precio);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
 
 

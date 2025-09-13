@@ -153,6 +153,7 @@
             // 
             // cboMarca
             // 
+            this.cboMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMarca.FormattingEnabled = true;
             this.cboMarca.Location = new System.Drawing.Point(186, 230);
             this.cboMarca.Name = "cboMarca";
@@ -161,6 +162,7 @@
             // 
             // cboCategoria
             // 
+            this.cboCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategoria.FormattingEnabled = true;
             this.cboCategoria.Location = new System.Drawing.Point(186, 263);
             this.cboCategoria.Name = "cboCategoria";
@@ -175,6 +177,7 @@
             this.btnAceptar.TabIndex = 14;
             this.btnAceptar.Text = "ACEPTAR";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -184,6 +187,7 @@
             this.btnCancelar.TabIndex = 15;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // FmrAgregarArticulo
             // 
@@ -210,6 +214,7 @@
             this.Name = "FmrAgregarArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Agregar Articulo";
+            this.Load += new System.EventHandler(this.FmrAgregarArticulo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
