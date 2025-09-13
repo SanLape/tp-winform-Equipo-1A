@@ -173,5 +173,11 @@ namespace TPWinForm
             frmMarcaCategoria categoria = new frmMarcaCategoria(false);    // es false xq sale del boton de CATEGORIA.
             categoria.ShowDialog();
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            FmrAgregarArticulo articulo = new FmrAgregarArticulo();
+            articulo.ShowDialog();
+        }
     }
 }
