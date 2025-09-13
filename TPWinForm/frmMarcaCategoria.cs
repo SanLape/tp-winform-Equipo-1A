@@ -177,6 +177,10 @@ namespace TPWinForm
                 }
                 cargar();
             }
+            else
+            {
+                MessageBox.Show(" ESCRIBA EL NOMBRE ");
+            }
         }
     }
 }

@@ -40,8 +40,10 @@
             // dgvMarCat
             // 
             this.dgvMarCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMarCat.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMarCat.Location = new System.Drawing.Point(11, 40);
             this.dgvMarCat.Name = "dgvMarCat";
+            this.dgvMarCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMarCat.Size = new System.Drawing.Size(308, 231);
             this.dgvMarCat.TabIndex = 0;
             // 
