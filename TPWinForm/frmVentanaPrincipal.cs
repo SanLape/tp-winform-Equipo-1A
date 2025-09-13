@@ -180,5 +180,16 @@ namespace TPWinForm
             articulo.ShowDialog();
             cargar();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo articuloSeleccionado;
+            articuloSeleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
+
+            FmrModificarArticulo ventanaModificar = new FmrModificarArticulo(articuloSeleccionado);
+            ventanaModificar.ShowDialog();
+
+            
+        }
     }
 }
