@@ -192,7 +192,7 @@ namespace TPWinForm
                     dgvArticulo.DataSource = null;
                     dgvArticulo.DataSource = negocio.listar();
                     ocultar_Columnas(dgvArticulo);
-
+                    txtBuscarArtículo.Clear();
                 }
             }
             catch (Exception ex)
