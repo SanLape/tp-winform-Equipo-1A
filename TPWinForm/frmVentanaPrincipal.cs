@@ -60,12 +60,20 @@ namespace TPWinForm
         }
         private void dgvArticulo_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvArticulo.CurrentRow != null) 
+            if (dgvArticulo.CurrentRow != null)
             {
-                Articulo artSelec = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
-                cargrImgen(artSelec.imagen.ImagenUrl);
-            }
+                Articulo artSelec = dgvArticulo.CurrentRow.DataBoundItem as Articulo;
 
+                if (artSelec != null)
+                {
+                    string url = "https://media.istockphoto.com/id/1385481764/es/vector/fotograf%C3%ADa-prohibida-signo.jpg?s=612x612&w=0&k=20&c=086e9bSgllT8QdK1TmlXy0Rn-i7-L0EwLCOb-OnLIrg="; // imagen por defecto
+
+                    if (artSelec.imagen != null && !string.IsNullOrEmpty(artSelec.imagen.ImagenUrl))
+                        url = artSelec.imagen.ImagenUrl;
+
+                    cargrImgen(url);
+                }
+            }
         }
         private void mToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -183,6 +191,8 @@ namespace TPWinForm
                     dataGridViewBuscarArticulo.DataSource = null;
                     dgvArticulo.DataSource = null;
                     dgvArticulo.DataSource = negocio.listar();
+                    ocultar_Columnas(dgvArticulo);
+
                 }
             }
             catch (Exception ex)

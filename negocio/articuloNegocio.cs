@@ -105,6 +105,25 @@ namespace negocio
                 datos.setearParametro("@Precio", nuevo.Precio);
 
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                //NUEVO Agregar la imagen al cargar
+                // Obtengo el Id del artículo recién insertado
+                datos.setConsulta("SELECT MAX(Id) AS IdArticulo FROM ARTICULOS");
+                datos.ejecutarLectura();
+                int idArticulo = 0;
+                if (datos.Lector.Read())
+                {
+                    idArticulo = Convert.ToInt32(datos.Lector["IdArticulo"]);
+                }
+                datos.cerrarConexion();
+                // Inserto la imagen
+                string insertImagen = "INSERT INTO IMAGENES(IdArticulo, ImagenUrl) VALUES(@IdArticulo, @ImagenUrl)";
+                datos.setConsulta(insertImagen);
+                datos.setearParametro("@IdArticulo", idArticulo);
+                datos.setearParametro("@ImagenUrl", nuevo.imagen.ImagenUrl);
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
             }
             catch (Exception ex)
             {
@@ -176,6 +195,62 @@ namespace negocio
                 datos.setearParametro("@Codigo", codigo);
 
                 datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        //NUEVO Método para modificar un artículo existente
+        public void modificar(Articulo art)
+        {
+            try
+            {
+                // Actualizar los datos del artículo
+                string consultaArticulo = @"
+            UPDATE ARTICULOS
+            SET Codigo=@Codigo,
+                Nombre=@Nombre,
+                Descripcion=@Descripcion,
+                Precio=@Precio,
+                IdMarca=@IdMarca,
+                IdCategoria=@IdCategoria
+            WHERE Id=@Id";
+
+                datos.setConsulta(consultaArticulo);
+
+                datos.setearParametro("@Codigo", art.CodigoArticulo);
+                datos.setearParametro("@Nombre", art.Nombre);
+                datos.setearParametro("@Descripcion", art.Descripcion);
+                datos.setearParametro("@Precio", art.Precio);
+                datos.setearParametro("@IdMarca", art.marca.IdMarca);
+                datos.setearParametro("@IdCategoria", art.categoria.IdCategoria);
+                datos.setearParametro("@Id", art.IdArticulo);
+
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                // Actualizar la URL de la imagen principal si existe (tengo dudas como actualizar una url que no sea la principal)
+                if (art.imagen != null && art.imagen.IdImagen > 0)
+                {
+                    string consultaImagen = @"
+                UPDATE IMAGENES
+                SET ImagenUrl=@ImagenUrl
+                WHERE Id=@IdImagen AND IdArticulo=@IdArticulo";
+
+                    datos.setConsulta(consultaImagen);
+                    datos.setearParametro("@ImagenUrl", art.imagen.ImagenUrl);
+                    datos.setearParametro("@IdImagen", art.imagen.IdImagen);
+                    datos.setearParametro("@IdArticulo", art.IdArticulo);
+
+                    datos.ejecutarAccion();
+                    datos.cerrarConexion();
+                }
             }
             catch (Exception ex)
             {

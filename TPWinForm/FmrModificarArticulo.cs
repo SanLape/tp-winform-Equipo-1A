@@ -88,7 +88,30 @@ namespace TPWinForm
             }
         }
 
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                articulo.CodigoArticulo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.marca = (Marca)cboMarca.SelectedItem;
+                articulo.categoria = (Categoria)cboCategoria.SelectedItem;
 
+                // Actualizar la URL de la imagen principal si se cambió
+                articulo.imagen.ImagenUrl = txtUrlImagen.Text;
 
+                articuloNegocio negocio = new articuloNegocio();
+                negocio.modificar(articulo);
+
+                MessageBox.Show("Artículo modificado correctamente");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
     }
 }
