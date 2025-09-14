@@ -77,7 +77,7 @@ namespace TPWinForm
         }
         private void mToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FmrModificarArticulo ventana = new FmrModificarArticulo(); 
+            FmrAgregarArticulo ventana = new FmrAgregarArticulo(); 
             ventana.ShowDialog();
         }
 
@@ -145,7 +145,7 @@ namespace TPWinForm
             Articulo articuloSeleccionado;
             articuloSeleccionado = (Articulo)dgvArticulo.CurrentRow.DataBoundItem;
 
-            FmrModificarArticulo ventanaModificar = new FmrModificarArticulo(articuloSeleccionado);
+            FmrAgregarArticulo ventanaModificar = new FmrAgregarArticulo(articuloSeleccionado);
             ventanaModificar.ShowDialog();
             cargar();
             

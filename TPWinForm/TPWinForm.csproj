@@ -52,12 +52,6 @@
     <Compile Include="FmrAgregarArticulo.Designer.cs">
       <DependentUpon>FmrAgregarArticulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FmrModificarArticulo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FmrModificarArticulo.Designer.cs">
-      <DependentUpon>FmrModificarArticulo.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMarcaCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,9 +68,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FmrAgregarArticulo.resx">
       <DependentUpon>FmrAgregarArticulo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FmrModificarArticulo.resx">
-      <DependentUpon>FmrModificarArticulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarcaCategoria.resx">
       <DependentUpon>frmMarcaCategoria.cs</DependentUpon>
