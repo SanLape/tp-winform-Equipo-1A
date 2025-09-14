@@ -111,9 +111,15 @@ namespace TPWinForm
                         marcaNegocio marcaNegocio = new marcaNegocio();
                         Marca marca = (Marca)dgvMarCat.CurrentRow.DataBoundItem;
 
-                        marcaNegocio.eliminar(marca.IdMarca);
-
-                        MessageBox.Show(" MARCA ELIMINADA ");
+                        
+                        if (marcaNegocio.eliminar(marca.IdMarca))
+                        {
+                            MessageBox.Show(" MARCA ELIMINADA ");
+                        }
+                        else
+                        {
+                            MessageBox.Show(" MARCA EN USO, NO PUEDE SER ELIMINADA");
+                        }
                     }
                     else
                     {
@@ -126,9 +132,8 @@ namespace TPWinForm
                         }
                         else
                         {
-                            MessageBox.Show(" CATEGORIA EN USO ");
+                            MessageBox.Show(" CATEGORIA EN USO, NO PUEDE SER ELIMINADA");
                         }
-
                     }
                     cargar();
                 }

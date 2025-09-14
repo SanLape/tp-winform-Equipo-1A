@@ -59,17 +59,52 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        public void eliminar(int id)
+        public bool eliminar(int id)
         {
+
+            if (marcaEnUso(id))
+            {
+                return false;
+            }
+
             string consulta = "DELETE FROM MARCAS WHERE Id = @ID";
             try
             {
                 datos.setConsulta(consulta);
                 datos.setearParametro("@ID", id);
                 datos.ejecutarAccion();
+                return true;
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public bool marcaEnUso(int idMarca)
+        {
+            try
+            {
+                string consulta = "SELECT COUNT(*) FROM ARTICULOS WHERE IdMarca = @IdMarca";
+                datos.setConsulta(consulta);
+                datos.setearParametro("@IdMarca", idMarca);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return (int)datos.Lector[0] > 0;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
             finally
