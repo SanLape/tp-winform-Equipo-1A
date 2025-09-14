@@ -77,16 +77,16 @@ namespace TPWinForm
         }
         private void mToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FmrAgregarArticulo ventana = new FmrAgregarArticulo(); 
+            FmrAgregarArticulo ventana = new FmrAgregarArticulo();
             ventana.ShowDialog();
         }
 
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FmrAgregarArticulo ventana = new FmrAgregarArticulo();  
+            FmrAgregarArticulo ventana = new FmrAgregarArticulo();
             ventana.ShowDialog();
         }
- 
+
         private void dgvArticulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -148,7 +148,7 @@ namespace TPWinForm
             FmrAgregarArticulo ventanaModificar = new FmrAgregarArticulo(articuloSeleccionado);
             ventanaModificar.ShowDialog();
             cargar();
-            
+
         }
 
         private void btnEliminarArticulo_Click(object sender, EventArgs e)
@@ -200,5 +200,113 @@ namespace TPWinForm
                 MessageBox.Show("Error al eliminar: " + ex.Message);
             }
         }
+
+        private void txtFiltroRapido_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltroRapido.Text;
+
+            if (filtro.Length >= 3)
+            {
+                listaFiltrada = listaArticulo.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.marca.Descripcion.ToUpper().Contains(filtro.ToUpper()) || x.categoria.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaArticulo;
+            }
+
+            dgvArticulo.DataSource = null;
+            dgvArticulo.DataSource = listaFiltrada;
+            ocultar_Columnas(dgvArticulo);
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            articuloNegocio negocio = new articuloNegocio();
+            try
+            {
+                if (validarFiltro())
+                    return;
+
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvArticulo.DataSource = negocio.filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool validarFiltro()
+        {
+            if (cboCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el campo para filtrar.");
+                return true;
+            }
+            if (cboCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el criterio para filtrar.");
+                return true;
+            }
+            if (cboCampo.SelectedItem.ToString() == "Número")
+            {
+                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                {
+                    MessageBox.Show("Debes cargar el filtro para numéricos...");
+                    return true;
+                }
+                if (!(soloNumeros(txtFiltroAvanzado.Text)))
+                {
+                    MessageBox.Show("Solo nros para filtrar por un campo numérico...");
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
+
+        private bool soloNumeros(string cadena)
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                    return false;
+            }
+            return true;
+        }
+
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboCampo.SelectedItem.ToString();
+            if (opcion == "Código" || opcion == "Nombre" || opcion == "Descripción")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
+            else if (opcion == "Precio")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Mayor a");
+                cboCriterio.Items.Add("Menor a");
+                cboCriterio.Items.Add("Igual a");
+            } 
+            
+            else if (opcion == "Marca" || opcion == "Categoría")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
+        }
+
+        
     }
 }

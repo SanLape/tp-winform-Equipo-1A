@@ -1,9 +1,10 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dominio;
+using System.Xml.Linq;
 
 namespace negocio
 {
@@ -265,6 +266,155 @@ namespace negocio
                 
             }
         }
+
+        public List<Articulo> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio,M.Id IdMarca, M.Descripcion Marca,C.Id IdCategoria, C.Descripcion Categoria,I.Id IdImagen, I.ImagenUrl FROM ARTICULOS A INNER JOIN MARCAS M ON M.Id = A.IdMarca INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id WHERE 1 = 1 AND ";
+
+                if (campo == "Código")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "A.Codigo LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "A.Codigo LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "A.Codigo LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "A.Nombre LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "A.Nombre LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "A.Nombre LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Descripción")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "A.Descripcion LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "A.Descripcion LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "A.Descripcion LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Precio")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "A.Precio > '" + filtro + "'";
+                            break;
+                        case "Menor a":
+                            consulta += "A.Precio < '" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "A.Precio = '" + filtro + "'";
+                            break;
+                    }
+                }
+                else if (campo == "Marca")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "M.Descripcion LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "M.Descripcion LIKE '%" + filtro + "'";
+                            break;
+                        default: 
+                            consulta += "M.Descripcion LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Categoría")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "C.Descripcion LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "C.Descripcion LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "C.Descripcion LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+
+
+
+
+                datos.setConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.IdArticulo = (int)datos.Lector["Id"];
+                    aux.CodigoArticulo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    aux.marca = new Marca();
+                    aux.marca.IdMarca = (int)datos.Lector["IdMarca"];
+                    aux.marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    aux.categoria = new Categoria();
+                    aux.categoria.IdCategoria = (int)datos.Lector["IdCategoria"];
+                    aux.categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    if (!(datos.Lector["IdImagen"] is DBNull))
+                    {
+                        Imagen img = new Imagen();
+                        img.IdImagen = (int)datos.Lector["IdImagen"];
+                        img.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                        img.IdArticulo = aux.IdArticulo;
+
+                        aux.imagen = img;
+                        aux.Imagenes.Add(img);
+                    }
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
 
 
 

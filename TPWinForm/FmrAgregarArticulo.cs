@@ -93,16 +93,19 @@ namespace TPWinForm
                 articulo.categoria = new Categoria();
                 articulo.categoria = (Categoria)cboCategoria.SelectedItem;
                 // Actualizar la URL de la imagen principal si se cambió
-                articulo.imagen.ImagenUrl = txtUrlImagen.Text;
+                
 
                 if (articulo.IdArticulo != 0)
                 {
+                    articulo.imagen.ImagenUrl = txtUrlImagen.Text;
                     negocio.modificar(articulo);
                     MessageBox.Show("Artículo modificado correctamente");
                     
                 }
                 else
                 {
+                    articulo.imagen = new Imagen();
+                    articulo.imagen.ImagenUrl = txtUrlImagen.Text;
                     negocio.agregar(articulo);
                     MessageBox.Show("Artículo agregado correctamente");
                 }
