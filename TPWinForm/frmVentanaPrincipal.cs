@@ -125,12 +125,14 @@ namespace TPWinForm
         {
             frmMarcaCategoria marca = new frmMarcaCategoria(true);    // es true xq sale del boton de MARCA.
             marca.ShowDialog();
+            cargar();
         }
 
         private void btnCategoria_Click(object sender, EventArgs e)
         {
             frmMarcaCategoria categoria = new frmMarcaCategoria(false);    // es false xq sale del boton de CATEGORIA.
             categoria.ShowDialog();
+            cargar();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

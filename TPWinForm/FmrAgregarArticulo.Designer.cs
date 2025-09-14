@@ -152,6 +152,7 @@
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(282, 20);
             this.txtUrlImagen.TabIndex = 11;
+            this.txtUrlImagen.Leave += new System.EventHandler(this.txtUrlImagen_Leave);
             // 
             // cboMarca
             // 
@@ -196,6 +197,7 @@
             this.pbxArticulo.Location = new System.Drawing.Point(538, 88);
             this.pbxArticulo.Name = "pbxArticulo";
             this.pbxArticulo.Size = new System.Drawing.Size(228, 196);
+            this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulo.TabIndex = 16;
             this.pbxArticulo.TabStop = false;
             // 

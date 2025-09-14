@@ -125,5 +125,10 @@ namespace TPWinForm
         {
             this.Close();
         }
+
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            cargrImgen(txtUrlImagen.Text);
+        }
     }
 }
