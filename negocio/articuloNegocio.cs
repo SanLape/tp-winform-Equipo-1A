@@ -209,6 +209,7 @@ namespace negocio
         //NUEVO Método para modificar un artículo existente
         public void modificar(Articulo art)
         {
+            AccesoDatos datos = new AccesoDatos();
             try
             {
                 // Actualizar los datos del artículo
@@ -235,6 +236,8 @@ namespace negocio
                 datos.ejecutarAccion();
                 datos.cerrarConexion();
 
+                AccesoDatos datosImg = new AccesoDatos();
+
                 // Actualizar la URL de la imagen principal si existe (tengo dudas como actualizar una url que no sea la principal)
                 if (art.imagen != null && art.imagen.IdImagen > 0)
                 {
@@ -243,13 +246,13 @@ namespace negocio
                 SET ImagenUrl=@ImagenUrl
                 WHERE Id=@IdImagen AND IdArticulo=@IdArticulo";
 
-                    datos.setConsulta(consultaImagen);
-                    datos.setearParametro("@ImagenUrl", art.imagen.ImagenUrl);
-                    datos.setearParametro("@IdImagen", art.imagen.IdImagen);
-                    datos.setearParametro("@IdArticulo", art.IdArticulo);
+                    datosImg.setConsulta(consultaImagen);
+                    datosImg.setearParametro("@ImagenUrl", art.imagen.ImagenUrl);
+                    datosImg.setearParametro("@IdImagen", art.imagen.IdImagen);
+                    datosImg.setearParametro("@IdArticulo", art.IdArticulo);
 
-                    datos.ejecutarAccion();
-                    datos.cerrarConexion();
+                    datosImg.ejecutarAccion();
+                    datosImg.cerrarConexion();
                 }
             }
             catch (Exception ex)
@@ -259,6 +262,7 @@ namespace negocio
             finally
             {
                 datos.cerrarConexion();
+                
             }
         }
 

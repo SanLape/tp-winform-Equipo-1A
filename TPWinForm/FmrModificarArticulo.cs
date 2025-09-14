@@ -23,6 +23,7 @@ namespace TPWinForm
         {
             InitializeComponent();
             this.articulo = articulo;
+            Text = "Modificar Articulo";
         }
 
 
@@ -56,7 +57,24 @@ namespace TPWinForm
             try
             {
                 cboMarca.DataSource = marcaNegocio.listar();
+                cboMarca.ValueMember = "IdMarca";
+                cboMarca.DisplayMember = "Descripcion";
                 cboCategoria.DataSource = catNegocio.listar();
+                cboCategoria.ValueMember = "IdCategoria";
+                cboCategoria.DisplayMember = "Descripcion";
+
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.CodigoArticulo;
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    txtUrlImagen.Text = articulo.imagen.ImagenUrl;
+
+                    cargrImgen(articulo.imagen.ImagenUrl);
+                    cboMarca.SelectedValue = articulo.marca.IdMarca;
+                    cboCategoria.SelectedValue = articulo.categoria.IdCategoria;
+                }
             }
             catch (Exception ex)
             {
@@ -65,16 +83,7 @@ namespace TPWinForm
             }
 
 
-            if (articulo != null)
-            {
-                txtCodigo.Text = articulo.CodigoArticulo;
-                txtNombre.Text = articulo.Nombre;
-                txtDescripcion.Text = articulo.Descripcion;
-                txtPrecio.Text = articulo.Precio.ToString();
-                txtUrlImagen.Text = articulo.imagen.ImagenUrl;
-                
-                cargrImgen(articulo.imagen.ImagenUrl);
-            }
+            
         }
         private void cargrImgen(string imgen)
         {
@@ -90,28 +99,43 @@ namespace TPWinForm
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            articuloNegocio negocio = new articuloNegocio();
+            
             try
             {
+                if (articulo == null)
+                    articulo = new Articulo();
+
                 articulo.CodigoArticulo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
                 articulo.marca = (Marca)cboMarca.SelectedItem;
                 articulo.categoria = (Categoria)cboCategoria.SelectedItem;
-
                 // Actualizar la URL de la imagen principal si se cambió
                 articulo.imagen.ImagenUrl = txtUrlImagen.Text;
 
-                articuloNegocio negocio = new articuloNegocio();
-                negocio.modificar(articulo);
-
-                MessageBox.Show("Artículo modificado correctamente");
-                this.Close();
+                if(articulo.IdArticulo != 0) 
+                {
+                    negocio.modificar(articulo);
+                    MessageBox.Show("Artículo modificado correctamente");
+                }
+                else
+                {
+                    negocio.agregar(articulo);
+                    MessageBox.Show("Artículo agregado correctamente");
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
