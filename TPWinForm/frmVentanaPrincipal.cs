@@ -147,7 +147,7 @@ namespace TPWinForm
 
             FmrModificarArticulo ventanaModificar = new FmrModificarArticulo(articuloSeleccionado);
             ventanaModificar.ShowDialog();
-
+            cargar();
             
         }
 
