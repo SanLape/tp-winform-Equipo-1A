@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -60,17 +61,52 @@ namespace negocio
             }
         }
 
-        public void eliminar(int id)
+        public bool eliminar(int id)
         {
+
+            if (categoriaEnUso(id))
+            {
+                return false;
+            }
+
             string consulta = "DELETE FROM CATEGORIAS WHERE Id = @ID";
             try
             {
                 datos.setConsulta(consulta);
                 datos.setearParametro("@ID", id);
                 datos.ejecutarAccion();
+                return true;
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public bool categoriaEnUso(int idCategoria)
+        {
+            try
+            {
+                string consulta = "SELECT COUNT(*) FROM ARTICULOS WHERE IdCategoria = @IdCategoria";
+                datos.setConsulta(consulta);
+                datos.setearParametro("@IdCategoria", idCategoria);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return (int)datos.Lector[0] > 0;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
             finally

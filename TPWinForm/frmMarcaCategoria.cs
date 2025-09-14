@@ -120,9 +120,14 @@ namespace TPWinForm
                         categoriaNegocio categoriaNegocio = new categoriaNegocio();
                         Categoria cate = (Categoria)dgvMarCat.CurrentRow.DataBoundItem;
 
-                        categoriaNegocio.eliminar(cate.IdCategoria);
-
-                        MessageBox.Show(" CATEGORIA ELIMINADA ");
+                        if (categoriaNegocio.eliminar(cate.IdCategoria))
+                        {
+                            MessageBox.Show(" CATEGORIA ELIMINADA ");
+                        }
+                        else
+                        {
+                            MessageBox.Show(" CATEGORIA EN USO ");
+                        }
 
                     }
                     cargar();
@@ -135,7 +140,7 @@ namespace TPWinForm
             catch (Exception ex)
             {
 
-                throw ex;
+                MessageBox.Show(ex.ToString());
             }
         }
 
